@@ -26,3 +26,11 @@ const products = [
     }
 ];
 
+// Melyik a legolcsóbb termék?
+let cheapest = products[0];
+for (const product of products) {
+    if (product.price < cheapest.price) {
+        cheapest = product;
+    }
+}
+console.log(cheapest);
