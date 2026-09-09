@@ -34,3 +34,11 @@ for (const product of products) {
     }
 }
 console.log(cheapest);
+
+// Mennyi a termékek átlagos ára?
+let sum = 0;
+for (const product of products) {
+    sum += product.price;
+}
+const average = sum / products.length;
+console.log(average.toFixed(1));
