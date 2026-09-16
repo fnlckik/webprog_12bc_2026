@@ -1,6 +1,11 @@
 // poligon: sokszög (pontok tömbje)
 function perimeter(poligon) {
-    // megadja a kerületét (oldalak hosszainak összege)
+    let s = 0;
+    for (let i = 0; i < poligon.length - 1; i++) {
+        s += distance(poligon[i], poligon[i+1]);
+    }
+    s += distance(poligon[0], poligon[poligon.length-1]);
+    return s;
 }
 
 const poligon = [
