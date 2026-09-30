@@ -33,6 +33,7 @@ function b() {
 
 // 3. A pontok hány százaléka fedhető le az origo középpontú,
 //    100 egység átmérőjű körrel?
+//    Megszámolás
 function c() {
     let count = 0; // Hány pont esik a körön belülre?
     const origo = new Point(0, 0);
@@ -42,5 +43,33 @@ function c() {
             count++;
         }
     }
-    return count / points.length * 100;
+    return (count / points.length * 100).toFixed(1) + "%";
+}
+
+// 4. Melyik pont van legközelebb az origohoz?
+//    Minimum-kiválasztás
+function d() {
+    const points = generate();
+    const origo = new Point(0, 0);
+    let closest = points[0];
+    for (const point of points) {
+        if (distance(point, origo) < distance(closest, origo)) {
+            closest = point;
+        }
+    }
+    return closest;
+}
+
+// 5. Van-e olyan pont, amely az x + y = 42 egyenesre esik?
+//    Eldöntés -> true, false
+function e() {
+    const points = generate();
+    let i = 0;
+    while (i < points.length && !(points[i].x + points[i].y === 42)) {
+        i++;
+    }
+    if (i < points.length) {
+        return points[i]; // object
+    }
+    return "Nincs ilyen pont."; // string
 }
