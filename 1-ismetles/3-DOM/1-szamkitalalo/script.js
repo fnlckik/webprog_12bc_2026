@@ -9,7 +9,13 @@ const button = document.querySelector("#guessButton");
 function handleGuess() { // Hogyan reagál?
     const input = document.querySelector("input[type='number']");
     const guess = parseInt(input.value);
-    console.log(`Megoldás: ${solution}`);
-    console.log(`Tipp: ${guess}`);
+    if (guess > solution) {
+        console.log(`A ${guess} túl nagy!`);
+    } else if (guess < solution) {
+        console.log(`A ${guess} túl kicsi!`);
+    } else {
+        console.log("Eltaláltad!");
+        button.disabled = true;
+    }
 }
 button.addEventListener("click", handleGuess); // Mire reagál?
