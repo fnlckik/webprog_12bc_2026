@@ -13,8 +13,9 @@ let maxGuess = 100;
 const button = document.querySelector("#guessButton");
 function handleGuess() { // Hogyan reagál?
     const input = document.querySelector("input[type='number']");
+    if (input.value === "") return;
     const guess = parseInt(input.value);
-    // Üres esetén hiba!!!
+    if (guess < 1 || guess > 100) return;
     count++;
 
     const tr = document.createElement("tr");
@@ -32,14 +33,21 @@ function handleGuess() { // Hogyan reagál?
         td3.innerText = "👇";
         maxGuess = guess;
         console.log(`A ${guess} túl nagy!`);
+        tr.style.backgroundColor = "rgba(251, 255, 0, 0.4)";
     } else if (guess < solution) {
         td3.innerText = "☝️";
         minGuess = guess;
         console.log(`A ${guess} túl kicsi!`);
+        tr.style.backgroundColor = "rgba(255, 0, 0, 0.2)";
     } else {
         td3.innerText = "🎈";
-        console.log("Eltaláltad!");
+        console.log("Eltaláltad! Gratulálunk!");
         button.disabled = true;
+        button.removeEventListener("click", handleGuess);
+        // button.remove();
+        // const parent = button.parentNode;
+        // parent.removeChild(button);
+        tr.style.backgroundColor = "rgba(115, 255, 0, 0.4)";
     }
     td3.title = Math.floor((maxGuess + minGuess) / 2);
 }
