@@ -32,6 +32,13 @@
     transition: 250ms;
 }
 
+#valasztas:has(.active) img:hover {
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    transition: none;
+}
+
 .active {
     background-color: lightgreen;
 }
