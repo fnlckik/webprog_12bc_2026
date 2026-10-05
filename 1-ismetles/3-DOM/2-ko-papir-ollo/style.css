@@ -32,10 +32,10 @@
     transition: 250ms;
 }
 
-#valasztas:has(.active) img:hover {
-    border: 0;
+#valasztas:has(.active) img:not(.active) {
+    padding: 0.75em;
     box-shadow: none;
-    padding: 0;
+    border: 0;
     transition: none;
 }
 
