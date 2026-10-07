@@ -1,10 +1,11 @@
-# Pénz és győzelem
+<h1> Pénz és győzelem </h1>
 
 Anna és Béla egy játékot játszanak. Kezdetben az asztalon van valamennyi pénz, és felváltva vesznek el belőle 500 Ft és 3000 Ft közötti értéket, de csakis 500-zal oszthatót! A győztes aki  az utolsó pénzt el tudja venni!
 
 <p align="center">
     <img src="./sample/start.png" height="120">
 </p>
+
 
 Készítsd el a játékot az alábbi leírás alapján! A változók neveit tetszőlegesen megválaszthatod, de a **függvények neveit pontosan a feladatok szerint** add meg!
 
