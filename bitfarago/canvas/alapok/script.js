@@ -12,3 +12,10 @@ ctx.font = "40px Comic Sans MS";
 ctx.textAlign = "center";
 ctx.textBaseline = "middle";
 ctx.fillText("5", 50+40, 100+50);
+
+const img = document.createElement("img");
+img.src = "karo-8.jpg";
+function draw() {
+    ctx.drawImage(img, 200, 100, 189/2, 256/2); // 756 x 1024
+}
+img.addEventListener("load", draw);
