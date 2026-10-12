@@ -1,0 +1,14 @@
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d"); // !
+
+ctx.fillStyle = "lightblue";
+ctx.fillRect(50, 100, 80, 100); // Rectangle (téglalap)
+
+ctx.strokeStyle = "black";
+ctx.strokeRect(50, 100, 80, 100); // körvonal
+
+ctx.fillStyle = "black";
+ctx.font = "40px Comic Sans MS";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+ctx.fillText("5", 50+40, 100+50);
