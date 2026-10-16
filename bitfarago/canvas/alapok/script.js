@@ -45,7 +45,10 @@ ctx.closePath();
 // Középpont: (450, 200)
 // Sugara: 100
 function isAngle(x, y) {
-    
+    // Kattintási pont távolsága a kör középpontjától
+    const d = Math.sqrt((x - 450)**2 + (y - 200)**2);
+    const alpha = Math.atan((y-200)/(x-450));
+    return d <= 100 && 0 <= alpha && alpha <= Math.PI/3 && 450 <= x;
 }
 
 function handleClick(e) {
@@ -65,7 +68,7 @@ function handleClick(e) {
         console.log("Kék kártya");
     } else if (pc.x <= x && x <= pc.x + pc.w && pc.y <= y && y <= pc.y + pc.h) { // póker kártya
         console.log("Káró 8-as");
-    } else if (isAngle(x, y)) {
+    } else if (isAngle(x, y)) { // ctx.isPointInPath(x, y)
         console.log("Piros körcikk");
     }
 }
