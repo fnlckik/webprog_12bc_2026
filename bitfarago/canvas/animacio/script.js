@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d"); // !
 const img = document.createElement("img");
 img.src = "karo-8.jpg";
 const pc = { x: 200, y: 100, w: 90, h: 128 };
-let v = 5;
+let v = 10;
 function animate() {
     // Töröljük a vásznat
     ctx.fillStyle = "lightgray";
@@ -63,7 +63,6 @@ function handleDown(e) {
     // e.code: billentyűt azonosít (ControlLeft, ControlRight, KeyD)
     // console.log(e.key, e.code);
     keys[e.code] = true;
-    move();
 }
 
 function handleUp(e) {
@@ -76,6 +75,7 @@ function handleLoad(e) {
     // keydown: gomb nyomvatartása
     document.addEventListener("keydown", handleDown);
     document.addEventListener("keyup", handleUp);
+    move();
     // animate();
 }
 img.addEventListener("load", handleLoad);
