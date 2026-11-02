@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main>
+        <h1>Wordle - CKIK Edition</h1>
+        <p id="info">Találd ki a mai szót!</p>
+        <div id="difficulty">
+            <label for="difficultySelect">Nehézség:</label>
+            <select id="difficultySelect">
+                <option value="easy">Könnyű</option>
+                <option value="normal" selected>Normál</option>
+                <option value="hard">Nehéz</option>
+            </select>
+        </div>
+        <input id="startButton" type="button" value="Játék kezdése!">
+        <div id="game">
+            <input type="text" placeholder="Írd be a tipped!">
+            <input id="guessButton" type="button" value="Tippelés">
+            <p class="message"></p>
+            <ul></ul>
+            <div id="result"></div>
+        </div>
+    </main>
+</body>
+</html>
