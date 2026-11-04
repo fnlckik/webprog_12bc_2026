@@ -68,11 +68,46 @@ function containsChar(word, c) {
 
 
 // F5 - 6p
-
+function renderGuess(word) {
+    if (word.length != solution.length) return;
+    const cards = document.querySelectorAll("li");
+    for (let i = 0; i < word.length; i++) {
+        cards[i].innerText = word[i];
+        if (word[i] === solution[i]) {
+            cards[i].style.backgroundColor = "lightgreen";
+        } else if (containsChar(solution, word[i])) {
+            cards[i].style.backgroundColor = "yellow";
+        } else {
+            cards[i].style.backgroundColor = "white";
+        }
+    }
+}
 
 
 // F6 - 5p
-
+const guessButton = document.querySelector("#guessButton");
+function handleGuess() {
+    const input = document.querySelector("input[type='text']");
+    const guess = input.value;
+    if (guess.length !== solution.length) {
+        input.classList.add("shake");
+        return;
+    }
+    input.classList.remove("shake");
+    count++;
+    renderGuess(guess.toUpperCase());
+    const result = document.querySelector("#result");
+    if (guess.toUpperCase() === solution) {
+        const img = document.createElement("img");
+        img.src = `images/${guess}.png`;
+        result.appendChild(img);
+        guessButton.disabled = true;
+        guessButton.removeEventListener("click", handleGuess);
+    } else if (count === countLimit) {
+        result.innerText = "Vesztettél! A helyes megoldás: " + solution;
+    }
+}
+guessButton.addEventListener("click", handleGuess);
 
 
 // F7 - bónusz
