@@ -23,11 +23,13 @@ function decideWinner(player, computer) {
 
 // e: event (esemény objektum)
 function chooseItem(e) {
+    if (!e.target.matches("img")) return;
     const img = e.target; // kattintást kiváltó objektumot adja (target)
     img.classList.add("active");
-    for (const image of images) {
-        image.removeEventListener("click", chooseItem);
-    }
+    parent.removeEventListener("click", chooseItem);
+    // for (const image of images) {
+    //     image.removeEventListener("click", chooseItem);
+    // }
     const computer = choose(); // "ko", "papir", "ollo"
     const computerImg = document.createElement("img");
     computerImg.src = `images/${computer}.png`;
@@ -36,7 +38,9 @@ function chooseItem(e) {
     p.before(computerImg);
     p.innerText = decideWinner(img.alt, computer);
 }
-const images = document.querySelectorAll("img");
-for (const img of images) {
-    img.addEventListener("click", chooseItem);
-}
+// const images = document.querySelectorAll("img");
+// for (const img of images) {
+//     img.addEventListener("click", chooseItem);
+// }
+const parent = document.querySelector("#valasztas");
+parent.addEventListener("click", chooseItem);
