@@ -36,6 +36,10 @@ button.addEventListener("click", color);
 // e.target: az eseményt kiváltó objektum (C#: sender)
 function logCell(e) {
     if (!e.target.matches("td")) return;
-    console.log(e.target);
+    const td = e.target;
+    const j = td.cellIndex; // Hányadik oszlop? (0-tól indexelve)
+    const tr = td.parentNode;
+    const i = tr.rowIndex; // Hányadik sorban?
+    console.log(`Sor: ${i+1}, Oszlop: ${j+1}`);
 }
 table.addEventListener("click", logCell);
