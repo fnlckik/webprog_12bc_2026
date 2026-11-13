@@ -45,5 +45,27 @@ function createBoard() {
 
 // F1 - c) -> generál egy táblázatot a board-ból
 function showBoard() {
-    
+    for (let i = 0; i < n; i++) {
+        const tr = document.createElement("tr");
+        for (let j = 0; j < m; j++) {
+            const td = document.createElement("td");
+            td.innerText = board[i][j].fruit;
+            tr.append(td);
+        }
+        table.appendChild(tr);
+    }
 }
+
+const button = document.querySelector("input[type='button']");
+function startGame() {
+    createBoard();
+    showBoard();
+    button.removeEventListener("click", startGame);
+}
+button.addEventListener("click", startGame);
+
+const checkbox = document.querySelector("input[type='checkbox']");
+function preventClick(e) {
+    e.preventDefault();
+}
+checkbox.addEventListener("click", preventClick);

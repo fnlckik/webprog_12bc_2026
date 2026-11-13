@@ -68,8 +68,29 @@ table.addEventListener("click", handleClick);
 
 // 4. Ha 1-től 9-ig lenyomunk egy billentyűt
 // a vele osztható cellák kapjanak 3px vastag szegélyt.
+// => CTRL + szám
 function handlePress(e) {
-    console.log(e.key);
-    // HF (péntekre)
+    e.preventDefault(); // megakadályozza az alapértelmezett viselkedést
+    const d = parseInt(e.key);
+    if (isNaN(d) || !e.ctrlKey) return; // Le kell nyomni a ctrl billentyűt is!
+    for (const row of table.rows) {
+        for (const cell of row.cells) {
+            if (cell.innerText % d === 0) {
+                cell.style.border = "3px solid black";
+            } else {
+                cell.style.border = "1px solid black";
+            }
+        }
+    }
 }
-document.addEventListener("keyup", handlePress);
+document.addEventListener("keydown", handlePress); // keyup
+
+// function removeKeys() {
+//     document.removeEventListener("keyup", handlePress);
+// }
+// input.addEventListener("focus", removeKeys);
+
+// function addKeys() {
+//     document.addEventListener("keyup", handlePress);
+// }
+// input.addEventListener("blur", addKeys);
