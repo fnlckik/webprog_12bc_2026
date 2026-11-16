@@ -2,6 +2,7 @@ table, td, tr {
     border: 1px solid black;
     border-collapse: collapse;
     margin: 1em auto;
+    /* border-spacing: 1em; */
 }
 
 td {

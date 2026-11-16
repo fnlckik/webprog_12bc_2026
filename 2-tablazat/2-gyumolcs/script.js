@@ -4,10 +4,9 @@ const pointsSpan = document.querySelector("#points span");
 
 // Állapottér!
 // field = {fruit: 🍎, value: 7}
-// x: vízszintes (oszlop: j), y: függőleges (sor: i)
 const n = 6, m = 7;
 let board = []; // listák listája ~ "mátrix"
-const pos = { x: null, y: null };
+const pos = { x: null, y: null }; // x: sor, y: oszlop
 let remainingSteps = 12;
 let points = 0;
 
@@ -44,7 +43,9 @@ function createBoard() {
 }
 
 // F1 - c) -> generál egy táblázatot a board-ból
+// Generatív megközelítés:
 function showBoard() {
+    table.innerHTML = "";
     for (let i = 0; i < n; i++) {
         const tr = document.createElement("tr");
         for (let j = 0; j < m; j++) {
@@ -54,7 +55,47 @@ function showBoard() {
         }
         table.appendChild(tr);
     }
+    if (pos.x !== null && pos.y !== null) { // elkezdődött a játék
+        table.rows[pos.x].cells[pos.y].classList.add("current-position");
+    }
 }
+
+// F2
+// table.__proto__
+function choosePosition(e) {
+    if (!e.target.matches("td")) return;
+    const td = e.target;
+    const tr = td.parentNode;
+    const row = tr.rowIndex; // Hanyadik sor?
+    const column = td.cellIndex; // Hanyadik oszlop (cella)?
+    pos.x = row;
+    pos.y = column;
+    td.classList.add("current-position");
+    table.removeEventListener("click", choosePosition);
+}
+table.addEventListener("click", choosePosition);
+
+// F3
+// Imperatív megközelítés (jobbra):
+// table.rows[pos.x].cells[pos.y].classList.remove("current-position");
+// pos.y++;
+// table.rows[pos.x].cells[pos.y].classList.add("current-position");
+function handleMove(e) {
+    console.log(e.key);
+    if (e.key === "ArrowRight") {
+        if (pos.y + 1 < m) {
+            pos.y++;
+            showBoard();
+        }
+    } else if (e.key === "ArrowLeft") {
+        if (pos.y - 1 >= 0) {
+            pos.y--;
+            showBoard();
+        }
+    }
+    console.log(pos);
+}
+document.addEventListener("keyup", handleMove);
 
 const button = document.querySelector("input[type='button']");
 function startGame() {
