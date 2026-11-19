@@ -81,18 +81,18 @@ table.addEventListener("click", choosePosition);
 // pos.y++;
 // table.rows[pos.x].cells[pos.y].classList.add("current-position");
 function handleMove(e) {
-    console.log(e.key);
+    // console.log(e.key);
+    if (pos.x === null || pos.y === null) return;
     if (e.key === "ArrowRight") {
-        if (pos.y + 1 < m) {
-            pos.y++;
-            showBoard();
-        }
+        if (pos.y + 1 < m) pos.y++;
     } else if (e.key === "ArrowLeft") {
-        if (pos.y - 1 >= 0) {
-            pos.y--;
-            showBoard();
-        }
+        if (pos.y - 1 >= 0) pos.y--;
+    } else if (e.key === "ArrowUp") {
+        if (pos.x - 1 >= 0) pos.x--;
+    } else if (e.key === "ArrowDown") {
+        if (pos.x + 1 < n) pos.x++;
     }
+    showBoard();
     console.log(pos);
 }
 document.addEventListener("keyup", handleMove);
