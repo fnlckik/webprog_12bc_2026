@@ -6,8 +6,8 @@ table, td, tr {
 }
 
 td {
-    padding: 0.4em;
-    width: 25px;
+    padding: 0.2em;
+    min-width: 25px;
     height: 25px;
     cursor: default;
 }

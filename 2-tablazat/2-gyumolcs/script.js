@@ -56,8 +56,10 @@ function showBoard() {
         table.appendChild(tr);
     }
     if (pos.x !== null && pos.y !== null) { // elkezdődött a játék
+        table.rows[pos.x].cells[pos.y].innerText = "🫃🏿"; // Johnny
         table.rows[pos.x].cells[pos.y].classList.add("current-position");
     }
+    stepsSpan.innerText = remainingSteps;
 }
 
 // F2
@@ -70,7 +72,8 @@ function choosePosition(e) {
     const column = td.cellIndex; // Hanyadik oszlop (cella)?
     pos.x = row;
     pos.y = column;
-    td.classList.add("current-position");
+    collectPoints(pos.x, pos.y);
+    // td.classList.add("current-position");
     table.removeEventListener("click", choosePosition);
 }
 table.addEventListener("click", choosePosition);
@@ -83,6 +86,8 @@ table.addEventListener("click", choosePosition);
 function handleMove(e) {
     // console.log(e.key);
     if (pos.x === null || pos.y === null) return;
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft" &&
+        e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
     if (e.key === "ArrowRight") {
         if (pos.y + 1 < m) pos.y++;
     } else if (e.key === "ArrowLeft") {
@@ -92,10 +97,41 @@ function handleMove(e) {
     } else if (e.key === "ArrowDown") {
         if (pos.x + 1 < n) pos.x++;
     }
-    showBoard();
-    console.log(pos);
+    remainingSteps--;
+    collectPoints(pos.x, pos.y);
+    if (remainingSteps === 0) {
+        document.removeEventListener("keyup", handleMove);
+        alert(`A végső pontszámod: ${points}`);
+    }
+    // console.log(pos);
 }
 document.addEventListener("keyup", handleMove);
+
+// F4
+function collectPoints(i, j) {
+    points += board[i][j].value;
+    pointsSpan.innerText = points;
+    board[i][j].value = 0;
+    board[i][j].fruit = "";
+    showBoard();
+}
+
+// F6
+function usePower(e) {
+    if (e.key !== "s") return;
+    for (let i = pos.x-1; i <= pos.x+1; i++) { // szomszédos mezők
+        for (let j = pos.y-1; j <= pos.y+1; j++) {
+            if (0 <= i && i < n && 0 <= j && j < m) { // ha ez a cella valid
+                // console.log(`(${i}, ${j})`);
+                collectPoints(i, j);
+            }
+        }
+    }
+    checkbox.disabled = true;
+    checkbox.parentNode.style.textDecoration = "line-through";
+    document.removeEventListener("keyup", usePower);
+}
+document.addEventListener("keyup", usePower);
 
 const button = document.querySelector("input[type='button']");
 function startGame() {
